@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rainwater Harvesting Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rainwater Calculator</h1>
+  <label for="area">Roof Area (in sq. meters):</label>
+  <input type="number" id="area" placeholder="e.g. 100">
+
+  <label for="rainfall">Rainfall (in mm):</label>
+  <input type="number" id="rainfall" placeholder="e.g. 500">
+
+  <label for="efficiency">Collection Efficiency (%):</label>
+  <input type="number" id="efficiency" placeholder="e.g. 85" value="85">
+
+  <button onclick="calculate()">Calculate Water Collected</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculate() {
+      const area = parseFloat(document.getElementById("area").value);
+      const rainfall = parseFloat(document.getElementById("rainfall").value);
+      const efficiency = parseFloat(document.getElementById("efficiency").value);
+
+      if (isNaN(area) || isNaN(rainfall) || isNaN(efficiency)) {
+        document.getElementById("result").textContent = "Please fill in all fields correctly.";
+        return;
+      }
+
+      const collected = (area * rainfall * (efficiency / 100)) / 1000; // result in kiloliters
+      document.getElementById("result").textContent = `You can collect approximately ${collected.toFixed(2)} kiloliters of water.`;
+    }
+  </script>
+</body>
+</html>
